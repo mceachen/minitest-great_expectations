@@ -37,7 +37,6 @@ describe "must_equal_contents" do
   it "complains about missing actual" do
     l = lambda { assert_equal_contents([1, 2, 3], [1, 2]) }
     error = assert_raises(MiniTest::Assertion, &l)
-    puts error.message
     error.message.must_match /missing expected.*\[3\]/im
   end
   it "complains about extra actual" do
