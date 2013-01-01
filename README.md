@@ -1,4 +1,4 @@
-# Minitest::GreatExpectations [![Build Status](https://travis-ci.org/mceachen/minitest-great_expectations.png?branch=master)](https://travis-ci.org/mceachen/minitest-great_expectations)
+# Minitest::GreatExpectations [![Build Status](https://travis-ci.org/mceachen/minitest-great_expectations.png)](https://travis-ci.org/mceachen/minitest-great_expectations)
 
 Adds several generally helpful assertions to minitest and minitest-spec that you might be used to
 having, especially if you're coming from rspec:
