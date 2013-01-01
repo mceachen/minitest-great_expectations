@@ -27,7 +27,7 @@ module MiniTest::Assertions
     missing_from_expected = expected.to_a - actual.to_a
     unless missing_from_expected.empty?
       message ||= "Expected:\n  #{mu_pp actual}\nto contain every element in:\n  #{mu_pp expected}."
-      flunk("#{message}\nMissing expected elements:\n  #{missing_from_expected}")
+      flunk("#{message}\nMissing expected elements:\n  #{mu_pp missing_from_expected}")
     end
   end
 
