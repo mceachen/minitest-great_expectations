@@ -19,7 +19,7 @@ describe "assert_equal_contents" do
   it "complains about extra actual" do
     l = lambda { assert_equal_contents([1, 2], [1, 2, 3]) }
     error = assert_raises(MiniTest::Assertion, &l)
-    error.message.must_match /extraneous actual.*3/im
+    error.message.must_match /extraneous actual.*\[3\]/im
   end
 end
 
@@ -37,12 +37,13 @@ describe "must_equal_contents" do
   it "complains about missing actual" do
     l = lambda { assert_equal_contents([1, 2, 3], [1, 2]) }
     error = assert_raises(MiniTest::Assertion, &l)
-    error.message.must_match /missing expected.*3/im
+    puts error.message
+    error.message.must_match /missing expected.*\[3\]/im
   end
   it "complains about extra actual" do
     l = lambda { assert_equal_contents([1, 2], [1, 2, 3]) }
     error = assert_raises(MiniTest::Assertion, &l)
-    error.message.must_match /extraneous actual.*3/im
+    error.message.must_match /extraneous actual.*\[3\]/im
   end
 end
 
@@ -57,7 +58,7 @@ describe "assert_includes_all" do
   it "fails with missing expected" do
     l = lambda { assert_includes_all([1, 2, 3], [1, 2]) }
     error = assert_raises(MiniTest::Assertion, &l)
-    error.message.must_match /missing expected.*3/im
+    error.message.must_match /missing expected.*\[3\]/im
   end
 end
 
@@ -72,7 +73,7 @@ describe "must_include_all" do
   it "fails with missing expected" do
     l = lambda { [1, 2].must_include_all [1, 2, 3] }
     error = assert_raises(MiniTest::Assertion, &l)
-    error.message.must_match /missing expected.*3/im
+    error.message.must_match /missing expected.*\[3\]/im
   end
 end
 

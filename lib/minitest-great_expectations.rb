@@ -39,7 +39,7 @@ module MiniTest::Assertions
 
   def assert_truthy(obj, msg = nil)
     msg = message(msg) { "Expected truthy, but was #{mu_pp obj}" }
-    assert !!obj, msg
+    assert obj, msg
   end
 
   # The first parameter must be ```false```, not just coercible to false.
