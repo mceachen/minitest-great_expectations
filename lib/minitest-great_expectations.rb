@@ -10,14 +10,14 @@ module MiniTest::Assertions
     error_msgs = []
     missing_from_actual = e_ary - a_ary
     unless missing_from_actual.empty?
-      error_msgs << "Missing expected elements:\n  #{missing_from_actual}"
+      error_msgs << "Missing expected elements:\n #{mu_pp missing_from_actual}"
     end
     missing_from_expected = a_ary - e_ary
     unless missing_from_expected.empty?
-      error_msgs << "Extraneous actual elements:\n  #{missing_from_expected}"
+      error_msgs << "Extraneous actual elements:\n  #{mu_pp missing_from_expected}"
     end
     unless error_msgs.empty?
-      message ||= "Expected:\n  #{actual}\nto equal contents of:\n  #{expected}."
+      message ||= "Expected:\n  #{mu_pp actual}\nto equal contents of:\n  #{mu_pp expected}."
       flunk("#{message}\n#{error_msgs.join("\n")}")
     end
   end
@@ -26,30 +26,30 @@ module MiniTest::Assertions
   def assert_includes_all(expected, actual, message = nil)
     missing_from_expected = expected.to_a - actual.to_a
     unless missing_from_expected.empty?
-      message ||= "Expected:\n  #{actual}\nto contain every element in:\n  #{expected}."
+      message ||= "Expected:\n  #{mu_pp actual}\nto contain every element in:\n  #{mu_pp expected}."
       flunk("#{message}\nMissing expected elements:\n  #{missing_from_expected}")
     end
   end
 
   # The first parameter must be ```true```, not coercible to true.
   def assert_true(obj, msg = nil)
-    msg = message(msg) { "<true> expected but was #{mu_pp(obj)}" }
+    msg = message(msg) { "<true> expected but was #{mu_pp obj}" }
     assert obj == true, msg
   end
 
   def assert_truthy(obj, msg = nil)
-    msg = message(msg) { "Expected truthy, but was #{mu_pp(obj)}" }
+    msg = message(msg) { "Expected truthy, but was #{mu_pp obj}" }
     assert !!obj, msg
   end
 
   # The first parameter must be ```false```, not just coercible to false.
   def assert_false(obj, msg = nil)
-    msg = message(msg) { "<false> expected but was #{mu_pp(obj)}" }
+    msg = message(msg) { "<false> expected but was #{mu_pp obj}" }
     assert obj == false, msg
   end
 
   def assert_falsy(obj, msg = nil)
-    msg = message(msg) { "Expected falsy but was #{mu_pp(obj)}" }
+    msg = message(msg) { "Expected falsy but was #{mu_pp obj}" }
     assert !obj, msg
   end
 end
