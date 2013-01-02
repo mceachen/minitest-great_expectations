@@ -22,7 +22,6 @@ gem 'minitest-great_expectations'
 Add this to your ```minitest_helper.rb```:
 
 ``` ruby
-require 'minitest/autorun'
 require 'minitest/great_expectations'
 ```
 
