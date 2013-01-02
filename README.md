@@ -46,4 +46,4 @@ And then execute:
 
 ### 0.0.1
 
-* First post
+* First whack
