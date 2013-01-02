@@ -1,4 +1,5 @@
-require "minitest-great_expectations/version"
+require 'minitest/spec'
+require 'minitest/great_expectations/version'
 
 module MiniTest::Assertions
 

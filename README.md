@@ -1,6 +1,6 @@
 # Minitest::GreatExpectations [![Build Status](https://api.travis-ci.org/mceachen/minitest-great_expectations.png?branch=master)](https://travis-ci.org/mceachen/minitest-great_expectations)
 
-Adds several generally helpful assertions to minitest and minitest-spec that you might be used to
+Adds several generally helpful assertions to [minitest](http://docs.seattlerb.org/minitest/) and minitest-spec that you might be used to
 having, especially if you're coming from rspec:
 
 ``` ruby
@@ -15,7 +15,16 @@ These may make it into minitest proper, someday.
 
 Add this line to your application's Gemfile:
 
-    gem 'minitest-great_expectations'
+``` ruby
+gem 'minitest-great_expectations'
+```
+
+Add this to your ```minitest_helper.rb```:
+
+``` ruby
+require 'gem/autotest'
+require 'minitest/great_expectations'
+```
 
 And then execute:
 
@@ -31,6 +40,10 @@ And then execute:
 
 ## Changelog
 
+### 0.0.2
+
+* Added proper require, and moved into correct subdirectories
+
 ### 0.0.1
 
-* First whack
+* First post
