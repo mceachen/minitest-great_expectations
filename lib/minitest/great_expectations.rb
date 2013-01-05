@@ -32,6 +32,14 @@ module MiniTest::Assertions
     end
   end
 
+  def assert_includes_none(expected, actual, message = nil)
+    unexpected = expected.to_a & actual.to_a
+    unless unexpected.empty?
+      message ||= "Expected:\n  #{mu_pp actual}\nnot to contain any element in:\n  #{mu_pp expected}."
+      flunk("#{message}\nUnexpected elements:\n  #{mu_pp unexpected.sort}")
+    end
+  end
+
   # The first parameter must be ```true```, not coercible to true.
   def assert_true(obj, msg = nil)
     msg = message(msg) { "<true> expected but was #{mu_pp obj}" }
@@ -58,6 +66,7 @@ end
 module MiniTest::Expectations
   infect_an_assertion :assert_equal_contents, :must_equal_contents
   infect_an_assertion :assert_includes_all, :must_include_all
+  infect_an_assertion :assert_includes_none, :wont_include_any
   infect_an_assertion :assert_true, :must_be_true, :unary
   infect_an_assertion :assert_truthy, :must_be_truthy, :unary
   infect_an_assertion :assert_false, :must_be_false, :unary

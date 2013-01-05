@@ -13,7 +13,7 @@ These may make it into minitest proper, someday.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application's Gemfile (in your "test" gem group, if you have one):
 
 ``` ruby
 gem 'minitest-great_expectations'
@@ -38,6 +38,10 @@ And then execute:
 5. Create new Pull Request
 
 ## Changelog
+
+### 0.0.3
+
+* Added ```assert_includes_none```/```wont_include_any```
 
 ### 0.0.2
 

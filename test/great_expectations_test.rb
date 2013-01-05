@@ -76,15 +76,52 @@ describe "must_include_all" do
   end
 end
 
+describe "assert_includes_none" do
+  it "passes on empty expected" do
+    assert_includes_none([], [])
+    assert_includes_none([], [1, 2, 3])
+  end
+  it "passes on empty actual" do
+    assert_includes_none([1, 2, 3], [])
+  end
+  it "passes on non-empty exptected" do
+    assert_includes_none([1, 2], [3, 4])
+  end
+  it "fails with expected" do
+    l = lambda { assert_includes_none([3, 2], [1, 2, 3]) }
+    error = assert_raises(MiniTest::Assertion, &l)
+    error.message.must_match /unexpected elements.*\[2\, 3\]/im
+  end
+end
+
+describe "wont_include_any" do
+  it "passes on empty expected" do
+    [].wont_include_any []
+    [].wont_include_any [1, 2, 3]
+  end
+  it "passes on empty actual" do
+    [1, 2, 3].wont_include_any []
+  end
+  it "passes on non-empty exptected" do
+    [1, 2].wont_include_any [3, 4]
+  end
+  it "fails with expected" do
+    l = lambda { [3, 2].wont_include_any [1, 2, 3] }
+    error = assert_raises(MiniTest::Assertion, &l)
+    error.message.must_match /unexpected elements.*\[2\, 3\]/im
+  end
+end
+
+
 describe "assert_true" do
-  #it "passes for true" do
-  #  assert_true(true)
-  #end
-  #it "fails for truthy" do
-  #  l = lambda { assert_true(1) }
-  #  error = assert_raises(MiniTest::Assertion, &l)
-  #  error.message.must_match /<true> expected/im
-  #end
+  it "passes for true" do
+    assert_true(true)
+  end
+  it "fails for truthy" do
+    l = lambda { assert_true(1) }
+    error = assert_raises(MiniTest::Assertion, &l)
+    error.message.must_match /<true> expected/im
+  end
 end
 
 describe "must_be_true" do
