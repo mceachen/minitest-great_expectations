@@ -5,6 +5,7 @@ having, especially if you're coming from rspec:
 
 ``` ruby
 [1, 2, 3].must_equal_contents [3, 2, 1]
+{:a => 1, :b => 2}.must_equal_hash {:b => 2, :a => 1}
 [1, 2, 3].must_include_all [1, 2]
 something.works?.should_be_true
 ```
@@ -38,6 +39,11 @@ And then execute:
 5. Create new Pull Request
 
 ## Changelog
+
+### 0.0.4
+
+* Added ```assert_equal_hash```/```must_equal_hash```
+* Reordered error messages to be more consistent with must_equal/assert_equal
 
 ### 0.0.3
 

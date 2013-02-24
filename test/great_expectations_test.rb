@@ -46,6 +46,30 @@ describe "must_equal_contents" do
   end
 end
 
+describe "assert_equal_hash" do
+  it "passes for empty" do
+    assert_equal_hash({}, {})
+  end
+  it "passes for hash" do
+    assert_equal_hash({:a => 1, :b => 2}, {:b => 2, :a => 1})
+  end
+  it "complains about missing values" do
+    l = lambda { assert_equal_hash({:a => 1, :b => 2}, {:b => 2}) }
+    error = assert_raises(MiniTest::Assertion, &l)
+    error.message.must_match /Missing expected keys:.*\[:a\]/im
+  end
+  it "complains about extra values" do
+    l = lambda { assert_equal_hash({:a => 1}, {:a => 1, :b => 2}) }
+    error = assert_raises(MiniTest::Assertion, &l)
+    error.message.must_match /Extraneous actual keys.*\[:b\]/im
+  end
+  it "complains about different values for the same key" do
+    l = lambda { assert_equal_hash({:a => 1}, {:a => 2}) }
+    error = assert_raises(MiniTest::Assertion, &l)
+    error.message.must_match /Expected \[:a\]:.*1.Actual \[:a\]:.*2/im
+  end
+end
+
 describe "assert_includes_all" do
   it "passes on empty expected" do
     assert_includes_all([], [])

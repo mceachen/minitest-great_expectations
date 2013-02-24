@@ -18,7 +18,34 @@ module MiniTest::Assertions
       error_msgs << "Extraneous actual elements:\n  #{mu_pp missing_from_expected}"
     end
     unless error_msgs.empty?
-      message ||= "Expected:\n  #{mu_pp actual}\nto equal contents of:\n  #{mu_pp expected}."
+      message ||= "Expected:\n  #{mu_pp expected}\nDid not match contents of Actual:\n  #{mu_pp actual}."
+      flunk("#{message}\n#{error_msgs.join("\n")}")
+    end
+  end
+
+  # Hash keys and values must be the same
+  def assert_equal_hash(expected, actual, message = nil)
+    e_keys = expected.keys
+    a_keys = actual.keys
+    error_msgs = []
+    missing_from_actual = e_keys - a_keys
+    unless missing_from_actual.empty?
+      error_msgs << "Missing expected keys:\n #{mu_pp missing_from_actual}"
+    end
+    missing_from_expected = a_keys - e_keys
+    unless missing_from_expected.empty?
+      error_msgs << "Extraneous actual keys:\n  #{mu_pp missing_from_expected}"
+    end
+    intersecting_keys = e_keys & a_keys
+    intersecting_keys.each do |ea|
+      exp = expected[ea]
+      act = actual[ea]
+      unless exp == act
+        error_msgs << "Expected [#{mu_pp ea}]: #{mu_pp exp}\nActual [#{mu_pp ea}]: #{mu_pp act}"
+      end
+    end
+    unless error_msgs.empty?
+      message ||= "Expected:\n  #{mu_pp expected}\ndid not equal Actual:\n  #{mu_pp actual}."
       flunk("#{message}\n#{error_msgs.join("\n")}")
     end
   end
@@ -27,7 +54,7 @@ module MiniTest::Assertions
   def assert_includes_all(expected, actual, message = nil)
     missing_from_expected = expected.to_a - actual.to_a
     unless missing_from_expected.empty?
-      message ||= "Expected:\n  #{mu_pp actual}\nto contain every element in:\n  #{mu_pp expected}."
+      message ||= "Expected:\n  #{mu_pp expected}\ndid not contain every element in Actual:\n  #{mu_pp actual}."
       flunk("#{message}\nMissing expected elements:\n  #{mu_pp missing_from_expected}")
     end
   end
@@ -35,7 +62,7 @@ module MiniTest::Assertions
   def assert_includes_none(expected, actual, message = nil)
     unexpected = expected.to_a & actual.to_a
     unless unexpected.empty?
-      message ||= "Expected:\n  #{mu_pp actual}\nnot to contain any element in:\n  #{mu_pp expected}."
+      message ||= "Expected:\n  #{mu_pp expected}\ncontained elements in Actual:\n  #{mu_pp actual}."
       flunk("#{message}\nUnexpected elements:\n  #{mu_pp unexpected.sort}")
     end
   end
@@ -65,6 +92,7 @@ end
 
 module MiniTest::Expectations
   infect_an_assertion :assert_equal_contents, :must_equal_contents
+  infect_an_assertion :assert_equal_hash, :must_equal_hash
   infect_an_assertion :assert_includes_all, :must_include_all
   infect_an_assertion :assert_includes_none, :wont_include_any
   infect_an_assertion :assert_true, :must_be_true, :unary
