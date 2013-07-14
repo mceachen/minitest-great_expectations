@@ -40,6 +40,10 @@ And then execute:
 
 ## Changelog
 
+### 0.0.5
+
+* Explicitly added MIT licensing to the gemspec.
+
 ### 0.0.4
 
 * Added ```assert_equal_hash```/```must_equal_hash```

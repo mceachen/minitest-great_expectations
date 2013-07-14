@@ -11,6 +11,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Adds several generally-useful matchers and expectations to minitest and minitest/spec}
   gem.summary       = gem.description
   gem.homepage      = ""
+  gem.license       = 'MIT'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
