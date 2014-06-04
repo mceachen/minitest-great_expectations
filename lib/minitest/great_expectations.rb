@@ -1,4 +1,4 @@
-require 'minitest/spec'
+require 'minitest/autorun'
 require 'minitest/great_expectations/version'
 
 module MiniTest::Assertions
