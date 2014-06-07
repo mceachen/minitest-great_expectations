@@ -1,4 +1,10 @@
-require 'minitest/autorun'
+require 'minitest'
+if Gem::Version.new(Minitest::VERSION) >= Gem::Version.new('5.0.0')
+  require 'minitest/autorun'
+else
+  require 'minitest/spec'
+end
+
 require 'minitest/great_expectations/version'
 
 module MiniTest::Assertions
@@ -100,4 +106,3 @@ module MiniTest::Expectations
   infect_an_assertion :assert_false, :must_be_false, :unary
   infect_an_assertion :assert_falsy, :must_be_falsy, :unary
 end
-
