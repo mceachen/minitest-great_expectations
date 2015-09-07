@@ -4,4 +4,3 @@ language: ruby
 rvm:
   - 2.2.3
   - jruby-head
-  - rbx-head
